@@ -6,7 +6,7 @@
 <body>
 <h1></h1>
 <?php
-	require_once '../lib/MySQL.php';
+	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
 
 	function shutudai($no){
 		$cls 	= new MySQL();
@@ -21,26 +21,50 @@
 		}
 		
 		$result = mysqli_query($con,'SELECT * FROM question');
-		$row_cnt= mysqli_num_rows($result);
-		$random = rand(1,$row_cnt);
+		$row_cnt= mysqli_num_rows($result);	//行数を取得
+		$random = mt_rand(1,$row_cnt);		//出題する問題の選択
+		//問題の取得
 		$query 	= 'SELECT * FROM question WHERE num ='.$random;
 		$result = mysqli_query($con,$query);
-		$data = mysqli_fetch_array($result);
+		$data 	= mysqli_fetch_array($result);
+		//選択肢の並び替え
+		$suretsu = range(0,3);
+		shuffle($suretsu);
+		for($i=0;$i<4;$i++){
+			switch($suretsu[$i]){
+				case 0:
+					$str[$i]= $data['answer'];
+					$answer	= $i;
+					break;
+				case 1:
+					$str[$i]= $data['fake1'];
+					break;
+				case 2:
+					$str[$i]= $data['fake2'];
+					break;
+				case 3:
+					$str[$i]= $data['fake3'];
+					break;
+			}
+		}
+		//選択肢の表示
 		echo "<p>\n";
 		echo '[No.'. $data['num'] . ']' . htmlspecialchars($data['name'],ENT_QUOTES) . "<br>\n";
 		echo $data['ryakusho'] ."<br>\n";
 		echo "<br>\n";
-		echo "選択肢:<select name='choice'".$no."><option value=1>".htmlspecialchars($data['answer'],ENT_QUOTES)."</option>\n";
-		echo "<option value=2>".htmlspecialchars($data['fake1'],ENT_QUOTES)."</option>\n";
-		echo "<option value=3>".htmlspecialchars($data['fake2'],ENT_QUOTES)."</option>\n";
-		echo "<option value=4>".htmlspecialchars($data['fake3'],ENT_QUOTES)."</option>\n";
+		echo "選択肢:<select name='choice'".$no.">\n";
+		for($i=0;$i<4;$i++){
+			echo "<option value=".$i.">".htmlspecialchars($str[$i],ENT_QUOTES)."</option>\n";
+		}
 		echo "</select></p>\n";
 		$con = mysqli_close($con);
 		if(!$con){
 			exit('データベースとの接続を閉じられませんでした。');
-		}		
+		}
+		return $answer;		//返り値は何番目の選択肢が正解かを返す
 	}
-	shutudai(1);
+	$a[1]=shutudai(1);
+	echo $a[1];
 
 ?>
 </body>
