@@ -72,6 +72,9 @@
 	$a=shutudai(1);
 	$b=shutudai(2);
 	$c=shutudai(3);
+	echo '<input type="hidden" name="q1" value="'.$a.'">'."\n";	//回答した答えはhiddenで送る
+	echo '<input type="hidden" name="q2" value="'.$b.'">'."\n";
+	echo '<input type="hidden" name="q3" value="'.$c.'">'."\n";
 	echo "<br><input type='submit' value='回答' />\n";
 	echo "</form>\n";
 ?>

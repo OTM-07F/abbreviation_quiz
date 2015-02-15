@@ -28,7 +28,7 @@
 		$query 	= 'SELECT * FROM question WHERE num ='.$random;
 		$result = mysqli_query($con,$query);
 		$data 	= mysqli_fetch_array($result);
-		$ans	= $data['answer'];		//正答を返却値にセット
+		$ans	= $data['num'];		//問題番号を返却値にセット
 		echo '<p>問題'.$no."<br>\n";
 		if(empty($data['name'])){
 			echo '[No.'. $data['num'] . "]<br>\n";
@@ -49,6 +49,9 @@
 	$a=shutudai(1);
 	$b=shutudai(2);
 	$c=shutudai(3);
+	echo '<input type="hidden" name="q1" value="'.$a.'">'."\n";	//回答した答えはhiddenで送る
+	echo '<input type="hidden" name="q2" value="'.$b.'">'."\n";
+	echo '<input type="hidden" name="q3" value="'.$c.'">'."\n";
 	echo "<br><input type='submit' value='回答' />\n";
 	echo "</form>\n";
 ?>
