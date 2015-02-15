@@ -23,6 +23,7 @@
 		$result = mysqli_query($con,'SELECT * FROM question');
 		$row_cnt= mysqli_num_rows($result);	//行数を取得
 		$random = mt_rand(1,$row_cnt);		//出題する問題の選択
+		$ans[0]	= $random;			//出題した問題番号を返却値にセット
 		//問題の取得
 		$query 	= 'SELECT * FROM question WHERE num ='.$random;
 		$result = mysqli_query($con,$query);
@@ -34,7 +35,7 @@
 			switch($suretsu[$i]){
 				case 0:
 					$str[$i]= $data['answer'];
-					$answer	= $i;
+					$ans[1]	= $i;	//正答の選択肢の番号を返却値にセット
 					break;
 				case 1:
 					$str[$i]= $data['fake1'];
@@ -61,10 +62,11 @@
 		if(!$con){
 			exit('データベースとの接続を閉じられませんでした。');
 		}
-		return $answer;		//返り値は何番目の選択肢が正解かを返す
+		return $ans;		//返り値は何番目の選択肢が正解かを返す
 	}
-	$a[1]=shutudai(1);
-	echo $a[1];
+	$a=shutudai(1);
+	echo $a[0]."<br>\n";
+	echo $a[1]."<br>\n";
 
 ?>
 </body>
