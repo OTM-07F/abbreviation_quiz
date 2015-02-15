@@ -62,12 +62,14 @@
 		if(!$con){
 			exit('データベースとの接続を閉じられませんでした。');
 		}
-		return $ans;		//返り値は何番目の選択肢が正解かを返す
+		return $ans;		//返り値は出題問題の番号と何番目の選択肢が正解かを返す
 	}
+	echo "<form method='post' action='easy_result.php'>\n";
 	$a=shutudai(1);
-	echo $a[0]."<br>\n";
-	echo $a[1]."<br>\n";
-
+	$b=shutudai(2);
+	$c=shutudai(3);
+	echo "<input type='submit' value='回答' />\n";
+	echo "</form>\n";
 ?>
 </body>
 </html>
