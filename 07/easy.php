@@ -57,7 +57,7 @@
 		}
 		echo $data['ryakusho'] ."<br>\n";
 		echo "<br>\n";
-		echo '選択肢:<select name="choice"'.$no.">\n";
+		echo '選択肢:<select name="choice'.$no.'">'."\n";
 		for($i=0;$i<4;$i++){
 			echo '<option value='.$i.'>'.htmlspecialchars($str[$i],ENT_QUOTES)."</option>\n";
 		}
