@@ -49,13 +49,17 @@
 			}
 		}
 		//選択肢の表示
-		echo "<p>\n";
-		echo '[No.'. $data['num'] . ']' . htmlspecialchars($data['name'],ENT_QUOTES) . "<br>\n";
+		echo '<p>問題'.$no."<br>\n";
+		if(empty($data['name'])){
+			echo '[No.'. $data['num'] . "]<br>\n";
+		}else{
+			echo '[No.'. $data['num'] . '] 出題者：' . htmlspecialchars($data['name'],ENT_QUOTES) . "<br>\n";
+		}
 		echo $data['ryakusho'] ."<br>\n";
 		echo "<br>\n";
-		echo "選択肢:<select name='choice'".$no.">\n";
+		echo '選択肢:<select name="choice"'.$no.">\n";
 		for($i=0;$i<4;$i++){
-			echo "<option value=".$i.">".htmlspecialchars($str[$i],ENT_QUOTES)."</option>\n";
+			echo '<option value='.$i.'>'.htmlspecialchars($str[$i],ENT_QUOTES)."</option>\n";
 		}
 		echo "</select></p>\n";
 		$con = mysqli_close($con);
@@ -68,7 +72,7 @@
 	$a=shutudai(1);
 	$b=shutudai(2);
 	$c=shutudai(3);
-	echo "<input type='submit' value='回答' />\n";
+	echo "<br><input type='submit' value='回答' />\n";
 	echo "</form>\n";
 ?>
 </body>
