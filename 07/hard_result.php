@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>略称クイズ(EASY)答え合わせ</title>
+<title>略称クイズ(HARD)答え合わせ</title>
 </head>
 <body>
 <h1></h1>
