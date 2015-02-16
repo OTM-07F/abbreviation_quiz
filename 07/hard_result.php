@@ -41,7 +41,7 @@
 	echo $q1['ryakusho'] ."<br>\n";
 	echo "<br>\n";
 	echo "あなたが入力した回答：".$_POST['write1']."<br>\n";
-	echo "正しい答え　　　　　：".htmlspecialchars($q1['ansewr'],ENT_QUOTES)."<br>\n";
+	echo "正しい答え　　　　　：".htmlspecialchars($q1['answer'],ENT_QUOTES)."<br>\n";
 	if(strcasecmp($_POST['write1'],$q1['answer'])==0){
 		echo "<strong>正解！</strong><br>\n";
 		$seikai	= $seikai+1;	//正解数カウント
