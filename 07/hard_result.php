@@ -145,7 +145,7 @@
 			echo "次は全問正解を目指しましょう。<br>\n";
 			break;
 		case 5:
-			echo '全問正解おめでとう！その知識を活かして<a href="post.php">問題投稿</a>お願いします'."<br>\n";
+			echo '全問正解おめでとう！その知識を活かして<a href="post_from.html">問題投稿</a>お願いします'."<br>\n";
 			break;
 	}
 ?>
