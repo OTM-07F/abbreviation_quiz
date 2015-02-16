@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 <title>略称クイズ(HARD)</title>
 </head>
 <body>
@@ -29,13 +30,13 @@
 		$result = mysqli_query($con,$query);
 		$data 	= mysqli_fetch_array($result);
 		$ans	= $data['num'];		//問題番号を返却値にセット
-		echo '<p>問題'.$no."<br>\n";
+		echo '<p><h3>問題'.$no."</h3><br>\n";
 		if(empty($data['name'])){
 			echo '[No.'. $data['num'] . "]<br>\n";
 		}else{
 			echo '[No.'. $data['num'] . '] 出題者：' . htmlspecialchars($data['name'],ENT_QUOTES) . "<br>\n";
 		}
-		echo $data['ryakusho']."<br>\n";
+		echo '<u>'.$data['ryakusho']."</u><br>\n";
 		echo "<br>\n";
 		echo '解答欄：<input type="text" name="write'.$no.'" size="20">'."\n";
 		echo "<br>\n";
@@ -46,11 +47,13 @@
 		return $ans;		//返り値は出題問題の番号を返す
 	}
 	echo "<form method='post' action='hard_result.php'>\n";
+	echo "<div>\n";
 	$a=shutudai(1);
 	$b=shutudai(2);
 	$c=shutudai(3);
 	$d=shutudai(4);
 	$e=shutudai(5);
+	echo "</div>\n";
 	echo '<input type="hidden" name="q1" value="'.$a.'">'."\n";	//回答した答えはhiddenで送る
 	echo '<input type="hidden" name="q2" value="'.$b.'">'."\n";
 	echo '<input type="hidden" name="q3" value="'.$c.'">'."\n";

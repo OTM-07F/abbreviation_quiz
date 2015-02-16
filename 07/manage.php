@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 <title>略称クイズ 管理ページ</title>
 </head>
 <body>
@@ -50,6 +51,7 @@
 
 	//投稿された問題とその承認フォーム
 	$result	= mysqli_query($con,'SELECT * FROM posted');
+	echo "<div>\n";
 	while ($data = mysqli_fetch_array($result)) {
 		if(empty($data['name'])){
 			echo '[No.'. $data['num'] . "] 無記名<br>\n";
@@ -62,17 +64,18 @@
 		echo 'フェイク候補１：'.$data['fake1']."<br>\n";
 		echo 'フェイク候補２：'.$data['fake2']."<br>\n";
 		echo 'フェイク候補３：'.$data['fake3']."<br>\n";
-		echo '<form action="manege.php?num='.$data['num'].'" method="post">'."<br>\n";
+		echo '<form action="manage.php?num='.$data['num'].'" method="post">'."<br>\n";
 		echo 'パスワード　　：<input type="password" name="key">'."\n";
 		echo '<input type="submit" name="certify" value="承認">　<input type="submit" name="certify" value="非承認">'."<br>\n";
 		
 	}
+	echo "</div>\n";
 	$con = mysqli_close($con);
 	if(!$con){
 		exit('データベースとの接続を閉じられませんでした。');
 	}
 ?>
 <br><br>
-<a href="index.html">トップヘージへ戻る</a>
+<a href="index.html">トップページへ戻る</a>
 </body>
 </html>

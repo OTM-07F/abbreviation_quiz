@@ -1,10 +1,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 <title>略称クイズ(EASY)</title>
 </head>
 <body>
-<h1></h1>
+<h1>略称クイズ(EASY)</h1>
+<p>
+５問の問題の正しいと思う答えをプルダウンメニューより選択してください。<br>
+全て選択したら回答ボタンをクリックすることで答え合わせができます
+</p><br>
 <?php
 	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
 
@@ -48,13 +53,13 @@
 			}
 		}
 		//選択肢の表示
-		echo '<p>問題'.$no."<br>\n";
+		echo '<p><h3>問題'.$no."</h3><br>\n";
 		if(empty($data['name'])){
 			echo '[No.'. $data['num'] . "]<br>\n";
 		}else{
 			echo '[No.'. $data['num'] . '] 出題者：' . htmlspecialchars($data['name'],ENT_QUOTES) . "<br>\n";
 		}
-		echo $data['ryakusho'] ."<br>\n";
+		echo '<u>'.$data['ryakusho'] ."</u><br>\n";
 		echo "<br>\n";
 		echo '選択肢:<select name="choice'.$no.'">'."\n";
 		for($i=0;$i<4;$i++){
@@ -68,11 +73,13 @@
 		return $ans;		//返り値は出題問題の番号を返す
 	}
 	echo '<form  action="easy_result.php" method="post">'."\n";
+	echo "<div>\n";
 	$a=shutudai(1);
 	$b=shutudai(2);
 	$c=shutudai(3);
 	$d=shutudai(4);
-	$e=shutudai(5)
+	$e=shutudai(5);
+	echo "</div>\n";
 	echo '<input type="hidden" name="q1num" value="'.$a.'">'."\n";	//回答した答えはhiddenで送る
 	echo '<input type="hidden" name="q2num" value="'.$b.'">'."\n";
 	echo '<input type="hidden" name="q3num" value="'.$c.'">'."\n";

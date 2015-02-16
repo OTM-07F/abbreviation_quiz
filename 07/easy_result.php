@@ -1,10 +1,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 <title>略称クイズ(EASY)答え合わせ</title>
 </head>
 <body>
-<h1></h1>
+<h1>結果発表</h1>
 <?php
 	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
 	function getdata($no){
@@ -28,11 +29,11 @@
 		}
 		return $data;	//問題データを返却する
 	}
-	
+	echo "<div>\n";
 	$seikai = 0;	//正解数
 	//問１について
 	$q1=getdata($_POST['q1num']);
-	echo "<p>問題1<br>\n";
+	echo "<p><h3>問題1</h3><br>\n";
 	if(empty($q1['name'])){
 		echo '[No.'. $q1['num'] . "]<br>\n";
 	}else{
@@ -51,7 +52,7 @@
 
 	//問２について
 	$q2=getdata($_POST['q2num']);
-	echo "<p>問題2<br>\n";
+	echo "<p><h3>問題2</h3><br>\n";
 	if(empty($q2['name'])){
 		echo '[No.'. $q2['num'] . "]<br>\n";
 	}else{
@@ -70,7 +71,7 @@
 
 	//問３について
 	$q3=getdata($_POST['q3num']);
-	echo "<p>問題3<br>\n";
+	echo "<p><h3>問題3</h3><br>\n";
 	if(empty($q3['name'])){
 		echo '[No.'. $q3['num'] . "]<br>\n";
 	}else{
@@ -88,8 +89,8 @@
 	}
 	//問４について
 	$q4=getdata($_POST['q4num']);
-	echo "<p>問題4<br>\n";
-	if(empty($q3['name'])){
+	echo "<p><h3>問題4</h3><br>\n";
+	if(empty($q4['name'])){
 		echo '[No.'. $q4['num'] . "]<br>\n";
 	}else{
 		echo '[No.'. $q4['num'] . '] 出題者：' . htmlspecialchars($q4['name'],ENT_QUOTES) . "<br>\n";
@@ -107,7 +108,7 @@
 
 	//問５について
 	$q5=getdata($_POST['q5num']);
-	echo "<p>問題3<br>\n";
+	echo "<p><h3>問題3\5</h3><br>\n";
 	if(empty($q5['name'])){
 		echo '[No.'. $q5['num'] . "]<br>\n";
 	}else{
@@ -123,6 +124,7 @@
 	}else{
 		echo "<strong>不正解</strong><br><br>\n";
 	}
+	echo "</div>\n";
 
 	//結果について
 	echo "<br><br>\n";
@@ -148,6 +150,6 @@
 			break;
 	}
 ?>
-	<a href="index.html">トップヘージへ戻る</a>
+	<a href="index.html">トップぺージへ戻る</a>
 </body>
 </html>

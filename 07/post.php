@@ -1,10 +1,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 <title>略称クイズ 問題投稿ページ</title>
 </head>
 <body>
-<h1></h1>
+<div>
 <?php
 	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
 	
@@ -33,5 +34,6 @@
 		exit('データベースとの接続を閉じられませんでした。');
 	}
 ?>
+</div>
 </body>
 </html>
