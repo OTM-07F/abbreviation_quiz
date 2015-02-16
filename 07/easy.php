@@ -23,7 +23,7 @@
 		$result = mysqli_query($con,'SELECT * FROM question');
 		$row_cnt= mysqli_num_rows($result);	//行数を取得
 		$random = mt_rand(1,$row_cnt);		//出題する問題の選択
-		$ans[0]	= $random;			//出題した問題番号を返却値にセット
+		$ans	= $random;			//出題した問題番号を返却値にセット
 		//問題の取得
 		$query 	= 'SELECT * FROM question WHERE num ='.$random;
 		$result = mysqli_query($con,$query);
@@ -35,7 +35,6 @@
 			switch($suretsu[$i]){
 				case 0:
 					$str[$i]= $data['answer'];
-					$ans[1]	= $i;	//正答の選択肢の番号を返却値にセット
 					break;
 				case 1:
 					$str[$i]= $data['fake1'];
@@ -66,18 +65,15 @@
 		if(!$con){
 			exit('データベースとの接続を閉じられませんでした。');
 		}
-		return $ans;		//返り値は出題問題の番号と何番目の選択肢が正解かを返す
+		return $ans;		//返り値は出題問題の番号を返す
 	}
 	echo '<form  action="easy_result.php" method="post">'."\n";
 	$a=shutudai(1);
 	$b=shutudai(2);
 	$c=shutudai(3);
-	echo '<input type="hidden" name="q1num" value="'.$a[0].'">'."\n";	//回答した答えはhiddenで送る
-	echo '<input type="hidden" name="q1ans" value="'.$a[1].'">'."\n";
-	echo '<input type="hidden" name="q2num" value="'.$b[0].'">'."\n";
-	echo '<input type="hidden" name="q2ans" value="'.$b[1].'">'."\n";
-	echo '<input type="hidden" name="q3num" value="'.$c[0].'">'."\n";
-	echo '<input type="hidden" name="q3ans" value="'.$c[1].'">'."\n";
+	echo '<input type="hidden" name="q1num" value="'.$a.'">'."\n";	//回答した答えはhiddenで送る
+	echo '<input type="hidden" name="q2num" value="'.$b.'">'."\n";
+	echo '<input type="hidden" name="q3num" value="'.$c.'">'."\n";
 	echo "<br><input type='submit' value='回答' />\n";
 	echo "</form>\n";
 ?>
