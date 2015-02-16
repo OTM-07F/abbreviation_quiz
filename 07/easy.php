@@ -68,7 +68,7 @@
 		}
 		return $ans;		//返り値は出題問題の番号と何番目の選択肢が正解かを返す
 	}
-	echo "<form method='post' action='easy_result.php'>\n";
+	echo '<form  action="easy_result.php" method="post">'."\n";
 	$a=shutudai(1);
 	$b=shutudai(2);
 	$c=shutudai(3);
