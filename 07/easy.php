@@ -59,7 +59,7 @@
 		echo "<br>\n";
 		echo '選択肢:<select name="choice'.$no.'">'."\n";
 		for($i=0;$i<4;$i++){
-			echo '<option value='.$i.'>'.htmlspecialchars($str[$i],ENT_QUOTES)."</option>\n";
+			echo '<option value='.$str[$i].'>'.htmlspecialchars($str[$i],ENT_QUOTES)."</option>\n";
 		}
 		echo "</select></p>\n";
 		$con = mysqli_close($con);
