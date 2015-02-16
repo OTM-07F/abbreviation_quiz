@@ -31,7 +31,7 @@
 	
 	$seikai = 0;	//正解数
 	//問１について
-	$q1=getdata($_POST['q1num']);
+	$q1=getdata($_POST['q1']);
 	echo "<p>問題1<br>\n";
 	if(empty($q1['name'])){
 		echo '[No.'. $q1['num'] . "]<br>\n";
@@ -40,17 +40,17 @@
 	}
 	echo $q1['ryakusho'] ."<br>\n";
 	echo "<br>\n";
-	echo "あなたが選んだ回答：".$_POST['choice1']."<br>\n";
-	echo "正しい答え　　　　：".$q1['answer']."<br>\n";
-	if($_POST['choice1']==$q1['answer']){
+	echo "あなたが入力した回答：".$_POST['write1']."<br>\n";
+	echo "正しい答え　　　　　：".htmlspecialchars($q1['ansewr'],ENT_QUOTES)."<br>\n";
+	if(strcasecmp($_POST['write1'],$q1['answer'])==0){
 		echo "<strong>正解！</strong><br>\n";
-		$seikai = $seikai+1;	//正解数カウント
+		$seikai	= $seikai+1;	//正解数カウント
 	}else{
 		echo "<strong>不正解</strong><br><br>\n";
 	}
 
 	//問２について
-	$q2=getdata($_POST['q2num']);
+	$q2=getdata($_POST['q2']);
 	echo "<p>問題2<br>\n";
 	if(empty($q2['name'])){
 		echo '[No.'. $q2['num'] . "]<br>\n";
@@ -59,9 +59,9 @@
 	}
 	echo $q2['ryakusho'] ."<br>\n";
 	echo "<br>\n";
-	echo "あなたが選んだ回答：".$_POST['choice2']."<br>\n";
-	echo "正しい答え　　　　：".$q2['answer']."<br>\n";
-	if($_POST['choice2']==$q2['answer']){
+	echo "あなたが入力した回答：".$_POST['write2']."<br>\n";
+	echo "正しい答え　　　　　：".htmlspecialchars($q2['answer'],ENT_QUOTES)."<br>\n";
+	if(strcasecmp($_POST['write2'],$q2['answer'])==0){
 		echo "<strong>正解！</strong><br>\n";
 		$seikai = $seikai+1;	//正解数カウント
 	}else{
@@ -69,7 +69,7 @@
 	}
 
 	//問３について
-	$q3=getdata($_POST['q3num']);
+	$q3=getdata($_POST['q3']);
 	echo "<p>問題3<br>\n";
 	if(empty($q3['name'])){
 		echo '[No.'. $q3['num'] . "]<br>\n";
@@ -78,27 +78,28 @@
 	}
 	echo $q3['ryakusho'] ."<br>\n";
 	echo "<br>\n";
-	echo "あなたが選んだ回答：".$_POST['choice3']."<br>\n";
-	echo "正しい答え　　　　：".$q3['answer']."<br>\n";
-	if($_POST['choice3']==$q3['answer']){
+	echo "あなたが入力した回答：".$_POST['write3']."<br>\n";
+	echo "正しい答え　　　　　：".htmlspecialchars($q3['answer'],ENT_QUOTES)."<br>\n";
+	if(strcasecmp($_POST['write3'],$q3['answer'])==0){
 		echo "<strong>正解！</strong><br>\n";
 		$seikai = $seikai+1;	//正解数カウント
 	}else{
 		echo "<strong>不正解</strong><br><br>\n";
 	}
+
 	//問４について
-	$q4=getdata($_POST['q4num']);
+	$q4=getdata($_POST['q4']);
 	echo "<p>問題4<br>\n";
-	if(empty($q3['name'])){
+	if(empty($q4['name'])){
 		echo '[No.'. $q4['num'] . "]<br>\n";
 	}else{
 		echo '[No.'. $q4['num'] . '] 出題者：' . htmlspecialchars($q4['name'],ENT_QUOTES) . "<br>\n";
 	}
 	echo $q4['ryakusho'] ."<br>\n";
 	echo "<br>\n";
-	echo "あなたが選んだ回答：".$_POST['choice4']."<br>\n";
-	echo "正しい答え　　　　：".$q4['answer']."<br>\n";
-	if($_POST['choice4']==$q4['answer']){
+	echo "あなたが入力した回答：".$_POST['write4']."<br>\n";
+	echo "正しい答え　　　　　：".htmlspecialchars($q4['answer'],ENT_QUOTES)."<br>\n";
+	if(strcasecmp($_POST['write4'],$q4['answer'])==0){
 		echo "<strong>正解！</strong><br>\n";
 		$seikai = $seikai+1;	//正解数カウント
 	}else{
@@ -106,8 +107,8 @@
 	}
 
 	//問５について
-	$q5=getdata($_POST['q5num']);
-	echo "<p>問題3<br>\n";
+	$q5=getdata($_POST['q5']);
+	echo "<p>問題5<br>\n";
 	if(empty($q5['name'])){
 		echo '[No.'. $q5['num'] . "]<br>\n";
 	}else{
@@ -115,16 +116,16 @@
 	}
 	echo $q5['ryakusho'] ."<br>\n";
 	echo "<br>\n";
-	echo "あなたが選んだ回答：".$_POST['choice5']."<br>\n";
-	echo "正しい答え　　　　：".$q5['answer']."<br>\n";
-	if($_POST['choice5']==$q5['answer']){
+	echo "あなたが入力した回答：".$_POST['write5']."<br>\n";
+	echo "正しい答え　　　　　：".htmlspecialchars($q5['answer'],ENT_QUOTES)."<br>\n";
+	if(strcasecmp($_POST['write5'],$q5['answer'])==0){
 		echo "<strong>正解！</strong><br>\n";
 		$seikai = $seikai+1;	//正解数カウント
 	}else{
 		echo "<strong>不正解</strong><br><br>\n";
 	}
-
-	//結果について
+	
+	//結果について	
 	echo "<br><br>\n";
 	echo "成績　　　　　　　：".$seikai."/5<br>\n";
 	switch($seikai){
@@ -144,7 +145,7 @@
 			echo "次は全問正解を目指しましょう。<br>\n";
 			break;
 		case 5:
-			echo "全問正解おめでとう！次はHARDモードにも挑戦してみてください。<br>\n";
+			echo '全問正解おめでとう！その知識を活かして<a href="post.php">問題投稿</a>お願いします'."<br>\n";
 			break;
 	}
 ?>
