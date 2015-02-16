@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>管理ページ</h1>
+<p>ここで投稿された問題の承認を行います。問題として成立していない場合などは非承認してください。</p>
 <?php
 	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
 	
@@ -18,6 +19,8 @@
 	if(!$result){
 			exit('文字コードを指定できませんでした。');
 	}
+
+	//承認処理
 	if(isset($_POST['key']) and $_POST['key'] == 'utz'){
 		if(isset($_GET['num']) and isset($_POST['certify'])){
 			if($_POST['certify'] == '承認'){
@@ -44,6 +47,8 @@
 	}else if(isset($_POST['key'])){
 		echo "パスワードが違います。<br>\n";
 	}
+
+	//投稿された問題とその承認フォーム
 	$result	= mysqli_query($con,'SELECT * FROM posted');
 	while ($data = mysqli_fetch_array($result)) {
 		if(empty($data['name'])){
