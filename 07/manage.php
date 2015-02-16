@@ -24,7 +24,7 @@
 				$query	= 'SELECT * FROM posted WHERE num ='.$_GET['num'];
 				$result	= mysqli_query($con,$query);
 				$data 	= mysqli_fetch_array($result);
-				$query	"INSERT INTO question(ryakusho,answer,fake1,fake2,fake3,name) VALUES('".$data['ryakusho']."','".$data['answer']."','".$data['fake1']."','".$data['fake2']."','".$data['fake3']."','".$data['name']."')";
+				$query	= "INSERT INTO question(ryakusho,answer,fake1,fake2,fake3,name) VALUES('".$data['ryakusho']."','".$data['answer']."','".$data['fake1']."','".$data['fake2']."','".$data['fake3']."','".$data['name']."')";
 				$result	= mysqli_query($con,$query);
 				if (!$result) {
 	    				exit('データベースへの登録に失敗しました。');
@@ -41,7 +41,7 @@
 	    			exit('データベースからの削除に失敗しました。');
 			}
 		}
-	}else{
+	}else if(isset($_POST['key'])){
 		echo "パスワードが違います。<br>\n";
 	}
 	$result	= mysqli_query($con,'SELECT * FROM posted');
@@ -57,8 +57,8 @@
 		echo 'フェイク候補１：'.$data['fake1']."<br>\n";
 		echo 'フェイク候補２：'.$data['fake2']."<br>\n";
 		echo 'フェイク候補３：'.$data['fake3']."<br>\n";
-		echo '<form action="manege.php?num='.$data['num']." method="post">'."<br>\n";
-		echo 'パスワード　　：<input type="password" name="key">'."<br>\n";
+		echo '<form action="manege.php?num='.$data['num'].'" method="post">'."<br>\n";
+		echo 'パスワード　　：<input type="password" name="key">'."\n";
 		echo '<input type="submit" name="certify" value="承認">　<input type="submit" name="certify" value="非承認">'."<br>\n";
 		
 	}
