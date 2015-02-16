@@ -67,6 +67,10 @@
 		echo '<input type="submit" name="certify" value="承認">　<input type="submit" name="certify" value="非承認">'."<br>\n";
 		
 	}
+	$con = mysqli_close($con);
+	if(!$con){
+		exit('データベースとの接続を閉じられませんでした。');
+	}
 ?>
 <br><br>
 <a href="index.html">トップヘージへ戻る</a>
