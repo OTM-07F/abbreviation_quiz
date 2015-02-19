@@ -12,8 +12,10 @@
 </p><br>
 <?php
 	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
-
+	require_once 'header.php';
+	global $QUESTION;
 	function shutudai($no){
+		global $QUESTION;
 		$cls 	= new MySQL();
 		$con	= $cls->mysqli_connect();
 		
@@ -25,12 +27,13 @@
 			exit('文字コードを指定できませんでした。');
 		}
 		
-		$result = mysqli_query($con,'SELECT * FROM question');
+		$query	= 'SELECT * FROM '.$QUESTION;
+		$result = mysqli_query($con,$query);
 		$row_cnt= mysqli_num_rows($result);	//行数を取得
 		$random = mt_rand(1,$row_cnt);		//出題する問題の選択
 		$ans	= $random;			//出題した問題番号を返却値にセット
 		//問題の取得
-		$query 	= 'SELECT * FROM question WHERE num ='.$random;
+		$query 	= 'SELECT * FROM '.$QUESTION.' WHERE num ='.$random;
 		$result = mysqli_query($con,$query);
 		$data 	= mysqli_fetch_array($result);
 		//選択肢の並び替え

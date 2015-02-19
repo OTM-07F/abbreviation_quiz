@@ -8,7 +8,9 @@
 <h1>結果発表</h1>
 <?php
 	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
+	require_once 'header.php';
 	function getdata($no){
+		global $QUESTION;
 		$cls 	= new MySQL();
 		$con	= $cls->mysqli_connect();
 		
@@ -20,7 +22,7 @@
 			exit('文字コードを指定できませんでした。');
 		}
 		//問題データをデータベースより読み込む
-		$query 	= "SELECT * FROM question WHERE num =".$no;
+		$query 	= 'SELECT * FROM '.$QUESTION,' WHERE num ='.$no;
 		$result	= mysqli_query($con,$query);
 		$data 	= mysqli_fetch_array($result);
 		$con = mysqli_close($con);

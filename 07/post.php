@@ -8,7 +8,10 @@
 <div>
 <?php
 	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
+	require_once 'header.php';
 	
+	global $POSTED;
+
 	$cls 	= new MySQL();
 	$con	= $cls->mysqli_connect();
 	
@@ -20,7 +23,7 @@
 			exit('文字コードを指定できませんでした。');
 	}
 	
-	$query 	= "INSERT INTO posted(ryakusho,answer,fake1,fake2,fake3,name) VALUES('".$_POST['ryakusho']."','".$_POST['answer']."','".$_POST['fake1']."','".$_POST['fake2']."','".$_POST['fake3']."','".$_POST['name']."')";
+	$query 	= 'INSERT INTO '$POSTED."(ryakusho,answer,fake1,fake2,fake3,name) VALUES('".$_POST['ryakusho']."','".$_POST['answer']."','".$_POST['fake1']."','".$_POST['fake2']."','".$_POST['fake3']."','".$_POST['name']."')";
 	$result	= mysqli_query($con,$query);
 	if (!$result) {
     		exit('データベースへの登録に失敗しました。');

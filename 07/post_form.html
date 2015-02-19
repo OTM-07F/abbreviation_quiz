@@ -7,17 +7,18 @@
 <body>
 <h1>問題投稿フォーム</h1>
 <p>ここでは新しい問題の投稿ができます。ご協力お願いします。</p>
-<br><br>
+<br><br><div>
 <p>※の付いた項目は必須項目です。お名前は出題者名として出題時にのみ使用されます。</p><br>
 <form action="post.php" method="post">
-	問題とする略称　:<input type="text" name="ryakusho">※<br>
-	その問題の答え　:<input type="text" name="answer">※<br>
-	問題のフェイク１:<input type="text" name="fake1">※<br>
-	問題のフェイク２:<input type="text" name="fake2">※<br>
-	問題のフェイク３:<input type="text" name="fake3">※<br>
-	お名前　　　　　:<input type="text" name="name"><br><br>
+	問題とする略称	:<input type="text" name="ryakusho">※<br>
+	その問題の答え	:<input type="text" name="answer" id="ans">※<br>
+	問題のフェイク１:<input type="text" name="fake1" id="f1">※<br>
+	問題のフェイク２:<input type="text" name="fake2" id="f2">※<br>
+	問題のフェイク３:<input type="text" name="fake3" id="f3">※<br>
+	お名前　　　　　:<input type="text" name="name" id="nam"><br><br>
 	<input type="submit" value="投稿">
 </form>
+</div>
 <p>投稿していただいた問題は管理人の承認を経て出題されるようになります。</p>
 </body>
 </html>

@@ -9,7 +9,10 @@
 <p>ここで投稿された問題の承認を行います。問題として成立していない場合などは非承認してください。</p>
 <?php
 	require_once '../lib/MySQL.php';		//接続は共通のクラスを使う
+	require_once 'header.php';
 	
+	global $QUESTION;
+	global $POSTED;
 	$cls 	= new MySQL();
 	$con	= $cls->mysqli_connect();
 	
@@ -25,10 +28,10 @@
 	if(isset($_POST['key']) and $_POST['key'] == 'utz'){
 		if(isset($_GET['num']) and isset($_POST['certify'])){
 			if($_POST['certify'] == '承認'){
-				$query	= 'SELECT * FROM posted WHERE num ='.$_GET['num'];
+				$query	= 'SELECT * FROM '.$POSTED.' WHERE num ='.$_GET['num'];
 				$result	= mysqli_query($con,$query);
 				$data 	= mysqli_fetch_array($result);
-				$query	= "INSERT INTO question(ryakusho,answer,fake1,fake2,fake3,name) VALUES('".$data['ryakusho']."','".$data['answer']."','".$data['fake1']."','".$data['fake2']."','".$data['fake3']."','".$data['name']."')";
+				$query	= 'INSERT INTO '.$QUESTION."(ryakusho,answer,fake1,fake2,fake3,name) VALUES('".$data['ryakusho']."','".$data['answer']."','".$data['fake1']."','".$data['fake2']."','".$data['fake3']."','".$data['name']."')";
 				$result	= mysqli_query($con,$query);
 				if (!$result) {
 	    				exit('データベースへの登録に失敗しました。');
@@ -39,7 +42,7 @@
 			else if($_POST['certify'] == '非承認'){
 				echo "問題を非承認とし、データベース上から削除しました。<br>\n";
 			}
-			$query	= 'DELETE FROM posted WHERE num = '.$_GET['num'];
+			$query	= 'DELETE FROM '.$POSTED.' WHERE num = '.$_GET['num'];
 			$result	= mysqli_query($con,$query);
 			if (!$result) {
 	    			exit('データベースからの削除に失敗しました。');
@@ -50,7 +53,8 @@
 	}
 
 	//投稿された問題とその承認フォーム
-	$result	= mysqli_query($con,'SELECT * FROM posted');
+	$query	= 'SELECT * FROM '.$POSTED;
+	$result	= mysqli_query($con,$query);
 	echo "<div>\n";
 	while ($data = mysqli_fetch_array($result)) {
 		if(empty($data['name'])){
