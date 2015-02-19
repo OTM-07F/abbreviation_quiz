@@ -52,9 +52,15 @@ print <<<EOF
 	<dd><input type="password" id="title" name="loginpassword"  value=""></dd>
 </dl>
 <input type="hidden" name="mode" value="login">
-<input type="submit" id="submit" value="ログイン">
+EOF;
+if(isset($_SESSION["adminlogin"]) and $_SESSION["adminlogin"] == "1"){
+	echo '<input type="submit" id="submit" value="ログアウト">';
+}else{
+	echo '<input type="submit" id="submit" value="ログイン">';
+}
+print <<<EOF
 </form>
-<a href="index.html">トップページへへ戻る</a>
+<a href="index.html">トップページへ戻る</a>
 </body>
 </html>
 EOF;
