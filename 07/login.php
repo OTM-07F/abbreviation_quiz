@@ -29,13 +29,16 @@ function login($login) {
 		$rows = mysqli_num_rows($result);
 		if($rows != 0){
 			$_SESSION["adminlogin"] = "1";
+			$_SESSION["name"] = $login["loginname"];
 	   		$loginstr = "管理者としてログインに成功しました。";
 		}else{
 			$_SESSION["adminlogin"] = "0";
+			$_SESSION["name"] = "";
 			$loginstr = "ログイン名、パスワードが違います。";
 		}
 	}else{
 		$_SESSION["adminlogin"] = "0";
+		$_SESSION["name"] = "";
 		$loginstr = "ログイン名、パスワードを入力してください。";
 	}
 	return $loginstr;
@@ -78,6 +81,7 @@ print <<<EOF
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8">
+<link rel="stylesheet" href="style.css" type="text/css" />
 <title>管理者ログイン</title>
 </head>
 <body>
@@ -88,6 +92,7 @@ print <<<EOF
 </dl>
 EOF;
 if(isset($_SESSION["adminlogin"]) and $_SESSION["adminlogin"] == "1"){
+	echo '<strong>ようこそ'.$_SESSION["name"]."様</strong><br>\n";
 	echo '<input type="hidden" name="mode" value="logout">'."\n";
 	echo '<input type="submit" id="logout" value="ログアウト">'."\n";
 }
