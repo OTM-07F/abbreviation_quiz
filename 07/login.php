@@ -1,19 +1,42 @@
 <?php 
+require_once '../lib/MySQL.php';	//接続は共通のクラスを使う
+require_once 'header.php';
+
+
 //管理者ログイン処理 
 function login($login) {
 
+	global $ADMIN;
 	$loginstr="";
 
 	//ログインモードの初期化
 	$_SESSION["adminlogin"] = "0";
 
 	//ログイン名とパスワードが一致するか確認する
-	if(isset($login["loginname"]) && isset($login["loginpassword"]) && $login["loginname"] == LOGIN_NAME && md5($login["loginpassword"]) == LOGIN_PASSWD) {
- 		$_SESSION["adminlogin"] = "1";
-   		$loginstr = "管理者としてログインに成功しました。";
+	if(isset($login["loginname"]) && isset($login["loginpassword"])){
+		$cls 	= new MySQL();
+		$con	= $cls->mysqli_connect();
+		
+		if(!$con){
+			exit('データベースに接続できませんでした。');
+		}
+		$result = mysqli_query($con,'SET NAMES utf8');
+		if(!$result){
+				exit('文字コードを指定できませんでした。');
+		}
+		$query = 'SELECT * FROM '.$ADMIN." WHERE name = '".$login["loginname"]."' AND password = '".$login["loginpassword"]."'";
+		$result	= mysqli_query($con,$query);
+		$rows = mysqli_num_rows($result);
+		if($rows != 0){
+			$_SESSION["adminlogin"] = "1";
+	   		$loginstr = "管理者としてログインに成功しました。";
+		}else{
+			$_SESSION["adminlogin"] = "0";
+			$loginstr = "ログイン名、パスワードが違います。";
+		}
 	}else{
 		$_SESSION["adminlogin"] = "0";
-		$loginstr = "ログイン名、パスワードが違います。";
+		$loginstr = "ログイン名、パスワードを入力してください。";
 	}
 	return $loginstr;
 }
@@ -39,9 +62,6 @@ function logout() {
 //セッションの開始
 session_start();
 
-//ログイン名とパスワードを保存 
-define("LOGIN_NAME","root"); 
-define("LOGIN_PASSWD","e4614ebc0ccee5c02dca712c9acc7f45");
 //管理者のログイン処理を行う
 if(isset($_POST["mode"]) and $_POST["mode"] == "login") {
 	//ログイン関数を呼び出す
